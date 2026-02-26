@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0A1628" />
+    <meta name="description" content="BusTrackr - Community powered real-time bus tracking for Madurai" />
+    <meta name="author" content="deepamahadevan27-hub" />
+
+    <!-- Open Graph / Social Share -->
+    <meta property="og:title" content="BusTrackr" />
+    <meta property="og:description" content="Community-powered real-time bus tracking. No GPS needed!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://deepamahadevan27-hub.github.io/bustrackr" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚌</text></svg>" />
+
+    <title>BusTrackr</title>
+
+    <style>
+      /* Loading screen before React loads */
+      #splash {
+        position: fixed;
+        inset: 0;
+        background: #0A1628;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }
+      #splash .bus-icon {
+        font-size: 64px;
+        animation: bounce 1s infinite;
+        margin-bottom: 16px;
+      }
+      #splash .brand {
+        font-family: sans-serif;
+        font-weight: 800;
+        font-size: 24px;
+        color: #F8FAFF;
+        letter-spacing: -0.5px;
+      }
+      #splash .brand span { color: #F97316; }
+      #splash .dots {
+        margin-top: 24px;
+        display: flex;
+        gap: 8px;
+      }
+      #splash .dot {
+        width: 8px; height: 8px;
+        background: #2E7CF6;
+        border-radius: 50%;
+        animation: pulse 1.2s infinite;
+      }
+      #splash .dot:nth-child(2) { animation-delay: 0.2s; }
+      #splash .dot:nth-child(3) { animation-delay: 0.4s; }
+
+      @keyframes bounce {
+        0%,100% { transform: translateY(0); }
+        50%      { transform: translateY(-12px); }
+      }
+      @keyframes pulse {
+        0%,100% { opacity: 0.3; transform: scale(0.8); }
+        50%      { opacity: 1;   transform: scale(1.2); }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run BusTrackr.</noscript>
+
+    <!-- Splash screen shown while React loads -->
+    <div id="splash">
+      <div class="bus-icon">🚌</div>
+      <div class="brand">Bus<span>Trackr</span></div>
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+    <!-- React mounts here -->
+    <div id="root"></div>
+    <script type="module" src="/src/index.jsx"></script>
+
+    <!-- Hide splash once React loads -->
+    <script>
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          var splash = document.getElementById('splash');
+          if (splash) {
+            splash.style.opacity = '0';
+            setTimeout(function () { splash.remove(); }, 500);
+          }
+        }, 800);
+      });
+    </script>
+  </body>
+</html>
